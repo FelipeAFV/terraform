@@ -70,6 +70,6 @@ resource "null_resource" "prepare_deployer_for_whitecloud" {
 }
 
 variable controlAsCompute {
-    type = string
-    default = "false"
+    type = bool
+    default = false
 }
