@@ -31,14 +31,9 @@ variable imageName {
 }
 variable "ipNodes" {
 	type = list(string)
-	default = ["123.123.123.123","2.2.2.2", "12.13.32.11"]
+	default = ["123.123.123.123","2.2.2.2", "12.13.32.11","12.13.32.11","12.13.32.5"]
 }
 
-
-variable nodeFlavour {
-  type = string
-  default = "m1.medium"
-}
 
 /* Obtain project id from command-line */
 variable projectId {
@@ -55,12 +50,7 @@ variable prefix {
   default = ""
 }
 
-/* SSH timeout */
-variable timeout {
-  type = number
-  default = 120
-}
- 
+
 resource "template_dir" "prepare_local_whitecloud_config" {
   source_dir = "etc/whitecloud/"
   destination_dir = "/tmp/whitecloud/"
