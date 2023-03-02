@@ -1,4 +1,4 @@
-
+#!/bin/bash
 
 if [ -z "$INFRA_CONTROL_AS_COMPUTE" ]; then
     echo "Empty option control as compute."
