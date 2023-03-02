@@ -15,10 +15,7 @@ roles:
   compute:
 %{ for ipNode in split(",", ipNodesString) ~}
 # #amountAdminNodes >= #nodes -> install in all nodes
-%{ if amountAdminNodes >= length(split(",", ipNodesString))  ~}
-    - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
-%{ else ~}  # #amountAdminNodes < #nodes -> install only in non-admin nodes
-%{ if controlAsCompute  ~}
+%{ if amountAdminNodes >= length(split(",", ipNodesString)) || controlAsCompute ~}
     - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
 %{ else ~}  # #amountAdminNodes < #nodes -> install only in non-admin nodes
 # only print when not working in one of first admin nodes
