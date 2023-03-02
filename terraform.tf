@@ -15,13 +15,13 @@ variable amountsIpsNotWhiteMist{
 /* Total amount of nodes to be created */
 variable amountNodes {
   type = number
-  default = 1
+  default = 5
 }
 
 /* Amount of admin nodes to be created */
 variable amountAdminNodes {
   type = number
-  default = 1
+  default = 3
 }
 
 /* Obtain imageName from command-line */
@@ -29,6 +29,11 @@ variable imageName {
   type = string
   default = "Ubuntu 20.04 LTS"
 }
+variable "ipNodes" {
+	type = list(string)
+	default = ["123.123.123.123","2.2.2.2", "12.13.32.11"]
+}
+
 
 variable nodeFlavour {
   type = string
