@@ -61,6 +61,10 @@ resource "template_dir" "prepare_local_whitecloud_config" {
   destination_dir = "/tmp/whitecloud/"
   vars = {
     controlAsCompute = var.controlAsCompute
+    ipNodesString = join(",", var.ipNodes)
+    amountAdminNodes = var.amountAdminNodes
+    ipVip = var.ipVip
+    prefix = var.prefix
   }
 }
 
