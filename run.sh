@@ -19,7 +19,7 @@ elif [[ "$INFRA_CONTROL_AS_COMPUTE" == "n" ]] || [[ "$INFRA_CONTROL_AS_COMPUTE" 
 else
     INFRA_CONTROL_AS_COMPUTE=false
 fi
-
+ echo $INFRA_CONTROL_AS_COMPUTE
 
 
 terraform apply -auto-approve -var="controlAsCompute=$INFRA_CONTROL_AS_COMPUTE"             
