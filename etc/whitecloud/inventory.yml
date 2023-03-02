@@ -18,6 +18,9 @@ roles:
 %{ if amountAdminNodes >= length(split(",", ipNodesString)) || controlAsCompute == true ~}
     - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
 %{ else ~}  # #amountAdminNodes < #nodes -> install only in non-admin nodes
+%{ if controlAsCompute  ~}
+    - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
+%{ else ~}  # #amountAdminNodes < #nodes -> install only in non-admin nodes
 # only print when not working in one of first admin nodes
 %{ if index(split(",", ipNodesString), ipNode) >= amountAdminNodes ~}
     - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
