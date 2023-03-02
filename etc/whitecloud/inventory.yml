@@ -14,7 +14,6 @@ roles:
 %{ endfor ~}
   compute:
 %{ for ipNode in split(",", ipNodesString) ~}
-  ${ controlAsCompute }
 # #amountAdminNodes >= #nodes -> install in all nodes
 %{ if amountAdminNodes >= length(split(",", ipNodesString)) || controlAsCompute  ~}
     - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
