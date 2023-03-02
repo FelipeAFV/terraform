@@ -1,0 +1,56 @@
+##
+## Cloud Inventory File
+##
+roles:
+#
+# Define each role (control, compute, network, monitoring, storage) and assign the target nodes
+#
+  control:
+# install in admin nodes only
+%{ for ipNode in split(",", ipNodesString) ~}
+%{ if index(split(",", ipNodesString), ipNode) < amountAdminNodes ~}
+    - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
+%{ endif ~}
+%{ endfor ~}
+  compute:
+%{ for ipNode in split(",", ipNodesString) ~}
+# #amountAdminNodes >= #nodes -> install in all nodes
+%{ if amountAdminNodes >= length(split(",", ipNodesString)) || controlAsCompute ~}
+    - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
+%{ else ~}  # #amountAdminNodes < #nodes -> install only in non-admin nodes
+# only print when not working in one of first admin nodes
+%{ if index(split(",", ipNodesString), ipNode) >= amountAdminNodes ~}
+    - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
+%{ endif ~}
+%{ endif ~}
+%{ endfor ~}
+  network:
+# install in all nodes
+%{ for ipNode in split(",", ipNodesString) ~}
+%{ if index(split(",", ipNodesString), ipNode) < amountAdminNodes ~}
+    - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
+%{ endif ~}
+%{ endfor ~}
+  monitoring:
+# install in all nodes
+%{ for ipNode in split(",", ipNodesString) ~}
+%{ if index(split(",", ipNodesString), ipNode) < amountAdminNodes ~}
+    - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
+%{ endif ~}
+%{ endfor ~}
+  storage:
+# install in all nodes
+    - ${prefix}node-0
+
+targets:
+  common:
+    ansible_user: ubuntu
+    ansible_become: yes
+#
+# Define the IP Addresses for each node
+#
+%{ for ipNode in split(",", ipNodesString) ~}
+  ${prefix}node-${index(split(",", ipNodesString), ipNode)}:
+    ansible_host: "${ipNode}"
+
+%{ endfor ~}
