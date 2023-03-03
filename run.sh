@@ -7,7 +7,7 @@
 #     echo "Wrong value, insert a valid one." 
 #     read -p "Enter control as compute (y/N): " INFRA_CONTROL_AS_COMPUTE
 # done
-source ./env.sh
+source env.sh
 
 INFRA_CONTROL_AS_COMPUTE="${INFRA_CONTROL_AS_COMPUTE:-false}"
 
