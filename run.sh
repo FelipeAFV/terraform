@@ -14,4 +14,4 @@ INFRA_CONTROL_AS_COMPUTE=$([[ $INFRA_CONTROL_AS_COMPUTE == "true" ]] &&  echo "t
 echo $INFRA_CONTROL_AS_COMPUTE
 
 
-# terraform apply -auto-approve -var="controlAsCompute=$INFRA_CONTROL_AS_COMPUTE"             
+terraform apply -auto-approve -var="controlAsCompute=$INFRA_CONTROL_AS_COMPUTE"             
