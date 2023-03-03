@@ -1,0 +1,24 @@
+---
+all:
+  children:
+    primary:
+      hosts:
+%{ for ipNode in split(",", ipNodesString) ~}
+%{ if index(split(",", ipNodesString), ipNode) < (amountAdminNodes) ~}
+        ${prefix}node-${index(split(",", ipNodesString), ipNode)}:
+          ansible_host: ${ipNode}
+%{ endif ~}
+%{ endfor ~}
+    secondary:
+      hosts:
+%{ for ipNode in split(",", ipNodesString) ~}
+%{ if amountAdminNodes >= length(split(",", ipNodesString)) || controlAsCompute ~}
+        ${prefix}node-${index(split(",", ipNodesString), ipNode)}:
+          ansible_host: ${ipNode}
+%{ else ~}
+%{ if index(split(",", ipNodesString), ipNode) >= amountAdminNodes ~}
+        ${prefix}node-${index(split(",", ipNodesString), ipNode)}:
+          ansible_host: ${ipNode}
+%{ endif ~}
+%{ endif ~}
+%{ endfor ~}

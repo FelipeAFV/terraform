@@ -1,0 +1,33 @@
+all:
+ hosts:
+%{ for ipNode in split(",", ipNodesString) ~}
+   ${prefix}node-${index(split(",", ipNodesString), ipNode)}:
+     ansible_user: ubuntu
+     ansible_host: ${ipNode}
+%{ endfor ~}
+
+ children:
+   k8s_masters:
+     hosts:
+%{ for ipNode in split(",", ipNodesString) ~}
+%{ if index(split(",", ipNodesString), ipNode) < (amountAdminNodes) ~}
+       ${prefix}node-${index(split(",", ipNodesString), ipNode)}: {}
+%{ endif ~}
+%{ endfor ~}
+
+   k8s_nodes:
+     hosts:
+%{ for ipNode in split(",", ipNodesString) ~}
+# #amountAdminNodes >= #nodes -> install in all nodes
+%{ if amountAdminNodes >= length(split(",", ipNodesString)) || controlAsCompute ~}
+       ${prefix}node-${index(split(",", ipNodesString), ipNode)}: {}
+%{ else ~}  # #amountAdminNodes < #nodes -> install only in non-admin nodes
+# only print when not working in one of first admin nodes
+%{ if index(split(",", ipNodesString), ipNode) >= amountAdminNodes ~}
+       ${prefix}node-${index(split(",", ipNodesString), ipNode)}: {}
+%{ endif ~}
+%{ endif ~}
+%{ endfor ~}
+
+vars:
+    EAIO: False

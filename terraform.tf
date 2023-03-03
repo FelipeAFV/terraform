@@ -52,21 +52,14 @@ variable prefix {
 
 
 resource "template_dir" "prepare_local_whitecloud_config" {
-  source_dir = "etc/whitecloud/"
-  destination_dir = "/tmp/whitecloud/"
+  source_dir = "etc/"
+  destination_dir = "/tmp/etc/"
   vars = {
     controlAsCompute = var.controlAsCompute
     ipNodesString = join(",", var.ipNodes)
     amountAdminNodes = var.amountAdminNodes
     prefix = var.prefix
   }
-}
-
-resource "null_resource" "prepare_deployer_for_whitecloud" {
-    provisioner "local-exec" {
-        command = "sudo cp -r inventory.yml inventory-copy.yml"
-        
-    }
 }
 
 variable controlAsCompute {
