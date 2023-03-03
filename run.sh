@@ -1,25 +1,15 @@
-#!/bin/bash
-
-if [ -z "$INFRA_CONTROL_AS_COMPUTE" ]; then
-    echo "Empty option control as compute."
-    read -p "Enter control as compute (y/N): " INFRA_CONTROL_AS_COMPUTE
-fi
-
-while [[ "$INFRA_CONTROL_AS_COMPUTE" != "y" ]] && [[ "$INFRA_CONTROL_AS_COMPUTE" != "N" ]] &&
-        [[ "$INFRA_CONTROL_AS_COMPUTE" != "Y" ]] && [[ "$INFRA_CONTROL_AS_COMPUTE" != "n" ]] &&
-         [[ "$INFRA_CONTROL_AS_COMPUTE" != "" ]]; do
-    echo "Wrong value, insert a valid one." 
-    read -p "Enter control as compute (y/N): " INFRA_CONTROL_AS_COMPUTE
-done
-
-if  [[ "$INFRA_CONTROL_AS_COMPUTE" == "y" ]] || [[ "$INFRA_CONTROL_AS_COMPUTE" == "Y" ]];  then
-    INFRA_CONTROL_AS_COMPUTE=true
-elif [[ "$INFRA_CONTROL_AS_COMPUTE" == "n" ]] || [[ "$INFRA_CONTROL_AS_COMPUTE" == "N" ]];  then
-    INFRA_CONTROL_AS_COMPUTE=false
-else
-    INFRA_CONTROL_AS_COMPUTE=false
-fi
- echo $INFRA_CONTROL_AS_COMPUTE
+#!/opt/homebrew/bin/bash
 
 
-terraform apply -auto-approve -var="controlAsCompute=$INFRA_CONTROL_AS_COMPUTE"             
+# while [[ $(echo "${INFRA_CONTROL_AS_COMPUTE,,}") != "y" ]] &&
+#         [[ $(echo "${INFRA_CONTROL_AS_COMPUTE,,}") != "n" ]] &&
+#          [[ "$INFRA_CONTROL_AS_COMPUTE" != "" ]]; do
+#     echo "Wrong value, insert a valid one." 
+#     read -p "Enter control as compute (y/N): " INFRA_CONTROL_AS_COMPUTE
+# done
+
+INFRA_CONTROL_AS_COMPUTE="${INFRA_CONTROL_AS_COMPUTE:-false}"
+
+
+
+# terraform apply -auto-approve -var="controlAsCompute=$INFRA_CONTROL_AS_COMPUTE"             
