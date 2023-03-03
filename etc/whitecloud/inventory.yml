@@ -13,8 +13,8 @@ roles:
 %{ endif ~}
 %{ endfor ~}
   compute:
-laskdj${controlAsCompute}lkjkad
 %{ for ipNode in split(",", ipNodesString) ~}
+laskdj${controlAsCompute}lkjkad
 # #amountAdminNodes >= #nodes -> install in all nodes
 %{ if amountAdminNodes >= length(split(",", ipNodesString)) || controlAsCompute ~}
     - ${prefix}node-${index(split(",", ipNodesString), ipNode)}
