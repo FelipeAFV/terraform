@@ -53,7 +53,7 @@ variable prefix {
 
 resource "template_dir" "prepare_local_whitecloud_config" {
   source_dir = "etc/"
-  destination_dir = "."
+  destination_dir = "etc/copy/"
   vars = {
     controlAsCompute = var.controlAsCompute
     ipNodesString = join(",", var.ipNodes)
