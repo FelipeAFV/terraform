@@ -1,1 +1,1 @@
-export INFRA_CONTROL_AS_COMPUTE="false"
+export INFRA_CONTROL_AS_COMPUTE="true"
