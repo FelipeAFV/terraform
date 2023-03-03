@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/bash
+#!/bin/bash
 
 
 # while [[ $(echo "${INFRA_CONTROL_AS_COMPUTE,,}") != "y" ]] &&
