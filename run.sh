@@ -9,9 +9,9 @@
 # done
 source env.sh
 
-INFRA_CONTROL_AS_COMPUTE="${INFRA_CONTROL_AS_COMPUTE=="true":-false}"
+INFRA_CONTROL_AS_COMPUTE=$([[ $INFRA_CONTROL_AS_COMPUTE == "true" ]] &&  echo "true" || echo "false")
 
 echo $INFRA_CONTROL_AS_COMPUTE
 
 
-terraform apply -auto-approve -var="controlAsCompute=$INFRA_CONTROL_AS_COMPUTE"             
+# terraform apply -auto-approve -var="controlAsCompute=$INFRA_CONTROL_AS_COMPUTE"             
